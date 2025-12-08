@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/nav_home_icon"
+        android:title="Trang chủ" />
+
+    <item
+        android:id="@+id/nav_shift"
+        android:icon="@drawable/nav_shift_icon"
+        android:title="Ca làm" />
+
+    <item
+        android:id="@+id/nav_chat"
+        android:icon="@drawable/nav_chat_icon"
+        android:title="Chat" />
+    <item
+        android:id="@+id/nav_more"
+        android:icon="@drawable/nav_more_icon"
+        android:title="Khác" />
+
+</menu>

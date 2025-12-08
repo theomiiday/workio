@@ -1,0 +1,168 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Tiêu đề -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="Khác"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <!-- Cá nhân -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="12dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_marginBottom="4dp">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_person"
+                />
+
+            <TextView
+                android:id="@+id/tvPersonal"
+                android:layout_marginStart="12dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Cá nhân"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:layout_width="29.08dp"
+                android:layout_height="33dp"
+                android:src="@drawable/ic_arrow_right"
+                android:layout_marginEnd="8dp" />
+        </LinearLayout>
+
+        <!-- Lịch sử vi phạm -->
+        <LinearLayout
+            android:id="@+id/layoutViolationHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="12dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_marginBottom="4dp">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_violation"
+                />
+
+            <TextView
+                android:layout_marginStart="12dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Lịch sử vi phạm"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:layout_width="29.08dp"
+                android:layout_height="33dp"
+                android:src="@drawable/ic_arrow_right"
+                android:layout_marginEnd="8dp" />
+        </LinearLayout>
+
+        <!-- Danh sách nơi làm việc -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="12dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_marginBottom="4dp">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_workplace"
+                />
+
+            <TextView
+                android:layout_marginStart="12dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Danh sách nơi làm việc"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:layout_width="29.08dp"
+                android:layout_height="33dp"
+                android:src="@drawable/ic_arrow_right"
+                android:layout_marginEnd="8dp" />
+        </LinearLayout>
+
+        <!-- Phiên bản -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="12dp"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_info"
+                />
+
+            <TextView
+                android:layout_marginStart="12dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Phiên bản"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+
+
+        </LinearLayout>
+
+        <!-- Đăng xuất -->
+        <TextView
+            android:id="@+id/tvLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đăng xuất"
+            android:textColor="#D32F2F"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:clickable="true"/>
+    </LinearLayout>
+</ScrollView>

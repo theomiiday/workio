@@ -1,0 +1,20 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- bottom navigation sử dụng -->
+    <style name="Theme.Nav" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/blue_primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+
+    </style>
+
+    <style name="Theme.Workio" parent="Base.Theme.Workio" />
+
+<!--    fragment_home.xml sử dụng-->
+    <style name="NoThemeButton" parent="android:Widget.Button">
+        <item name="android:background">@null</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:backgroundTint">@null</item>
+    </style>
+
+</resources>

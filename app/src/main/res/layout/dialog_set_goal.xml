@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Số ca mục tiêu tháng này"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp" />
+
+    <EditText
+        android:id="@+id/et_target_shifts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="VD: 16"
+        android:inputType="number"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btn_xac_nhan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Xác nhận"
+        android:textAllCaps="false"
+        android:background="@drawable/gradient_start_button"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+</LinearLayout>

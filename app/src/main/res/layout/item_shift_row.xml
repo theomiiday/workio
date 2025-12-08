@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingVertical="6dp">
+
+    <!-- Tên ca -->
+    <TextView
+        android:id="@+id/textShiftInfo"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textSize="15sp" />
+
+    <!-- GIỜ CHECKIN - CHECKOUT (ẩn mặc định, sẽ hiện ngoài cùng bên phải) -->
+    <TextView
+        android:id="@+id/tv_attendance_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="08:05 - 12:01"
+        android:textSize="15sp"
+        android:textColor="#444444"
+        android:visibility="gone"
+        android:layout_marginEnd="8dp" />
+
+    <!-- Icon trạng thái -->
+    <ImageView
+        android:id="@+id/iconShiftStatus"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="Status icon" />
+
+    <!-- Nút huỷ -->
+    <Button
+        android:id="@+id/btnCancelShift"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Huỷ"
+        android:textSize="13sp"
+        android:backgroundTint="#FF5252"
+        android:textColor="#FFFFFF"
+        android:minWidth="60dp" />
+
+</LinearLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue_primary">#004977</color>
+    <color name="myPrimaryBlue">#004977</color>
+    <color name="gray">#666666</color>
+    <color name="light_blue_bg">#F3F6FD</color>
+    <color name="gray_dark">#555555</color>
+    <color name="gray_light">#888888</color>
+
+    <!--    shift list adapter su dung-->
+    <color name="grey">#E4E6EB</color>
+    <color name="selectedItemBackground">#D0F0F8</color>
+    <color name="design_default_color_primary">#32C9FD</color>
+    <color name="teal_700">#004977</color>
+</resources>
