@@ -1,8 +1,10 @@
 package com.example.workio.ui.main.more;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -30,10 +32,13 @@ public class ViolationHistoryActivity extends AppCompatActivity {
     private ViolationHistoryAdapter adapter;
     private ApiService apiService;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_violation_history);
+        getWindow().setStatusBarColor(Color.WHITE);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         apiService = RetrofitClient.getInstance(this).getApiService();
 
@@ -43,7 +48,8 @@ public class ViolationHistoryActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         String employeeId = getIntent().getStringExtra("employeeId");
-
+        ImageView btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> finish());
         if (employeeId == null) {
             Toast.makeText(this, "Không tìm thấy employeeId", Toast.LENGTH_SHORT).show();
             finish();

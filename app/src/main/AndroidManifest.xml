@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nav">
         <activity
+            android:name=".ui.main.more.UpdatePhone"
+            android:exported="false" />
+        <activity
             android:name=".ui.main.more.ViolationHistoryActivity"
             android:exported="false" />
         <activity
@@ -33,7 +36,6 @@
         <activity
             android:name=".ui.auth.UpdateEmailActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.auth.LoginActivity"
             android:exported="true">

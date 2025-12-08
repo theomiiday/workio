@@ -39,6 +39,14 @@ public interface ApiService {
             @Body ChangePasswordRequest request
     );
 
+    @GET("users/profile")
+    Call<ApiResponse<UserProfile>> getUserProfile();
+    @PUT("users/profile")
+    Call<ApiResponse<UserProfile>> updateProfile(
+            @Body UpdateProfileRequest request
+    );
+
+
 
 
 

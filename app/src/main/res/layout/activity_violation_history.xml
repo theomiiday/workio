@@ -3,22 +3,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     android:background="#FFFFFF">
 
     <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="56sp"
         android:gravity="center_vertical"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:background="#2196F3">
+        android:paddingStart="16sp"
+        android:paddingEnd="16sp">
+
+        <!-- Nút Back -->
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="28sp"
+            android:layout_height="28sp"
+            android:padding="4sp"
+            android:src="@drawable/ic_arrow_back"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12sp"
             android:text="Lịch sử vi phạm"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold"/>
     </LinearLayout>
@@ -29,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="20sp"
         android:visibility="gone"/>
 
     <!-- Danh sách -->
@@ -37,5 +47,5 @@
         android:id="@+id/recyclerViolations"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="12dp"/>
+        android:padding="12sp"/>
 </LinearLayout>
