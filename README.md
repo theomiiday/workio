@@ -5,3 +5,6 @@
    - Chờ Gradle sync hoàn tất
 2. Run app
    - Dùng thiết bị thật hoặc emulator
+3. Tài khoản đăng nhập
+   email: nguyenthao24022004@gmail.com
+   mật khẩu: Matkhau9@
