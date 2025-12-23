@@ -94,8 +94,9 @@ public class HomeFragment extends Fragment {
         tv_current_income = view.findViewById(R.id.tv_current_income);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
+        logGpsOnEnter();
 
-        // ⭐ SỬA CHỖ 1 — Đồng bộ trạng thái từ SharedPreferences
+        //  Đồng bộ trạng thái từ SharedPreferences
         isCheckedIn = sessionManager.isCheckedIn();
 
         updateButtonStateDynamic();
@@ -126,6 +127,7 @@ public class HomeFragment extends Fragment {
                     .addToBackStack(null)
                     .commit();
         });
+
     }
 
     private final Runnable refreshRunnable = new Runnable() {
@@ -144,7 +146,13 @@ public class HomeFragment extends Fragment {
             Toast.makeText(requireContext(), " Không tìm thấy ca làm hôm nay để check-in", Toast.LENGTH_SHORT).show();
             return;
         }
+        // 🕒 Log thời gian hiện tại
+//        TimeZone vnTz = TimeZone.getTimeZone("Asia/Ho_Chi_Minh");
+//        SimpleDateFormat dfVN = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
+//        dfVN.setTimeZone(vnTz);
+//        Log.d("HomeFragment", "🕒 Giờ Việt Nam: " + dfVN.format(new Date()));
 
+        // 📍 Kiểm tra quyền vị trí
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{
@@ -160,18 +168,42 @@ public class HomeFragment extends Fragment {
         fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
                 .addOnSuccessListener(location -> {
                     if (location == null) {
-                        Toast.makeText(requireContext(), " Không thể lấy vị trí", Toast.LENGTH_SHORT).show();
+                        Log.e("HomeFragment", " Location null");
+                        Toast.makeText(requireContext(),
+                                "Không lấy được vị trí",
+                                Toast.LENGTH_SHORT).show();
                         return;
                     }
 
-                    CheckInRequest body = new CheckInRequest(registrationId, location.getLatitude(), location.getLongitude());
+                    //  KIỂM TRA FAKE GPS
+                    if (isFakeGPS(location)) {
+                        Log.e("HomeFragment", " PHÁT HIỆN FAKE GPS");
+
+                        Toast.makeText(requireContext(),
+                                "Phát hiện vị trí giả mạo. Không thể chấm công!",
+                                Toast.LENGTH_LONG).show();
+
+                        btnStartShift.setEnabled(true);
+                        btnStartShift.setAlpha(1f);
+                        return;
+                    }
+
+                    //  GPS THẬT → CHO CHECK-IN
+                    Log.e("HomeFragment",
+                            " GPS REAL → lat=" + location.getLatitude()
+                                    + ", lng=" + location.getLongitude());
+
+                    CheckInRequest body = new CheckInRequest(
+                            registrationId,
+                            location.getLatitude(),
+                            location.getLongitude()
+                    );
 
                     apiService.checkIn(token, body).enqueue(new Callback<ApiResponse<CheckInResponse>>() {
                         @Override
                         public void onResponse(Call<ApiResponse<CheckInResponse>> call, Response<ApiResponse<CheckInResponse>> response) {
                             if (response.isSuccessful() && response.body() != null) {
 
-                                // ⭐ SỬA CHỖ 2 — đồng bộ isCheckedIn + SharedPreferences
                                 isCheckedIn = true;
                                 sessionManager.setCheckedIn(true);
 
@@ -219,7 +251,6 @@ public class HomeFragment extends Fragment {
                         public void onResponse(Call<ApiResponse<CheckOutResponse>> call, Response<ApiResponse<CheckOutResponse>> response) {
                             if (response.isSuccessful() && response.body() != null) {
 
-                                // ⭐ SỬA CHỖ 3 — đồng bộ isCheckedIn + SharedPreferences
                                 isCheckedIn = false;
                                 sessionManager.setCheckedIn(false);
 
@@ -244,7 +275,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadAttendancesAndFilterShifts() {
-        String token = "Bearer " + sessionManager.getAccessToken();
 
         apiService.getAllAttendance(1, 100).enqueue(new Callback<ApiResponse<List<Attendance>>>() {
             @Override
@@ -364,7 +394,7 @@ public class HomeFragment extends Fragment {
         long diffToStart = startMillis - now.getTime();
         long diffToEnd = endMillis - now.getTime();
 
-        // ⭐ CASE 1 — TRƯỚC GIỜ LÀM > 15 PHÚT
+        //  CASE 1 — TRƯỚC GIỜ LÀM > 15 PHÚT
         if (diffToStart > 15 * 60 * 1000) {
             btnStartShift.setText("Bắt đầu");
             btnStartShift.setEnabled(false);
@@ -372,7 +402,7 @@ public class HomeFragment extends Fragment {
             return;
         }
 
-        // ⭐ CASE 2 — ĐANG TRONG CA (hoặc trước giờ làm ≤ 15 phút)
+        // CASE 2 — ĐANG TRONG CA (hoặc trước giờ làm ≤ 15 phút)
         if (diffToEnd > 0) {
 
             // *** CHƯA CHECK-IN ***
@@ -386,7 +416,7 @@ public class HomeFragment extends Fragment {
             // *** ĐÃ CHECK-IN ***
             btnStartShift.setText("Kết thúc");
 
-            // ❗ CHỈ BẬT KHI CÒN ≤5 PHÚT TRƯỚC GIỜ KẾT THÚC
+            //  CHỈ BẬT KHI CÒN ≤5 PHÚT TRƯỚC GIỜ KẾT THÚC
             long fiveMinutesBeforeEnd = endMillis - (5 * 60 * 1000);
 
             if (now.getTime() >= fiveMinutesBeforeEnd) {
@@ -400,7 +430,7 @@ public class HomeFragment extends Fragment {
             return;
         }
 
-        // ⭐ CASE 3 — HẾT GIỜ LÀM
+        //  CASE 3 — HẾT GIỜ LÀM
         btnStartShift.setText("Ca đã kết thúc");
         btnStartShift.setEnabled(false);
         btnStartShift.setAlpha(0.5f);
@@ -524,4 +554,44 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         handler.removeCallbacks(refreshRunnable);
     }
+    private void logGpsOnEnter() {
+        Log.e("HomeFragment", "📍 logGpsOnEnter() CALLED");
+
+        // Kiểm tra quyền
+        if (ActivityCompat.checkSelfPermission(requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(requireContext(),
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            Log.e("HomeFragment", "❌ CHƯA CÓ QUYỀN GPS");
+            return;
+        }
+
+        fusedLocationClient.getCurrentLocation(
+                Priority.PRIORITY_HIGH_ACCURACY,
+                null
+        ).addOnSuccessListener(location -> {
+
+            if (location == null) {
+                Log.e("HomeFragment", "❌ LOCATION = NULL");
+                return;
+            }
+
+            Log.e("HomeFragment",
+                    "  GPS ON ENTER → lat=" + location.getLatitude()
+                            + ", lng=" + location.getLongitude());
+        }).addOnFailureListener(e -> {
+            Log.e("HomeFragment", "❌ GPS FAIL: " + e.getMessage());
+        });
+    }
+    private boolean isFakeGPS(android.location.Location location) {
+        if (location == null) return false;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            return location.isFromMockProvider();
+        }
+
+        return false;
+    }
+
 }

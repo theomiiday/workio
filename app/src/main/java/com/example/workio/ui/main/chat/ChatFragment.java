@@ -122,7 +122,7 @@ public class ChatFragment extends Fragment {
     private void connectSocket() {
         if (getContext() == null) return;
         if (mSocket != null && mSocket.connected()) {
-            Log.d("Socket", "⚠️ Already connected, skip connectSocket()");
+            Log.d("Socket", " Already connected, skip connectSocket()");
             return;
         }
         try {
@@ -155,7 +155,7 @@ public class ChatFragment extends Fragment {
                 socketListenersRegistered = true;
             }
 
-            // ✅ CONNECT SAU CÙNG
+            //  CONNECT SAU CÙNG
             mSocket.connect();
         } catch (URISyntaxException e) {
             Log.e("Socket", "URI Error: " + e.getMessage());
@@ -164,19 +164,19 @@ public class ChatFragment extends Fragment {
     private void registerSocketListeners() {
         // CONNECT
         mSocket.on(Socket.EVENT_CONNECT, args -> {
-            Log.d("Socket", "✅ CONNECTED SUCCESS!");
+            Log.d("Socket", " CONNECTED SUCCESS!");
             if (getActivity() == null) return;
 
             requireActivity().runOnUiThread(() -> {
                 try {
                     if (isGroup) {
                         mSocket.emit("group:join");
-                        Log.d("Socket", "✅ Joined GROUP room");
+                        Log.d("Socket", " Joined GROUP room");
                     } else if (receiverId != null && !receiverId.isEmpty()) {
                         JSONObject joinData = new JSONObject();
                         joinData.put("userId", receiverId);
                         mSocket.emit("direct:join", joinData);
-                        Log.d("Socket", "✅ Joined DIRECT room: " + receiverId);
+                        Log.d("Socket", " Joined DIRECT room: " + receiverId);
                     }
                 } catch (JSONException e) {
                     Log.e("Socket", "JSON Error: " + e.getMessage());
@@ -186,12 +186,12 @@ public class ChatFragment extends Fragment {
 
         // CONNECT ERROR – in chi tiết
         mSocket.on(Socket.EVENT_CONNECT_ERROR, args -> {
-            Log.e("Socket", "❌ CONNECT ERROR detail: " + java.util.Arrays.toString(args));
+            Log.e("Socket", " CONNECT ERROR detail: " + java.util.Arrays.toString(args));
         });
 
         // DIRECT MESSAGE
         mSocket.on("direct:message:received", args -> {
-            Log.d("Socket", "🔥 DIRECT MESSAGE EVENT FIRED");
+            Log.d("Socket", " DIRECT MESSAGE EVENT FIRED");
             if (getActivity() == null) return;
 
             requireActivity().runOnUiThread(() -> {
@@ -207,7 +207,7 @@ public class ChatFragment extends Fragment {
                             messageList.add(newMsg);
                             adapter.notifyItemInserted(messageList.size() - 1);
                             recyclerChat.scrollToPosition(messageList.size() - 1);
-                            Log.d("Socket", "📨 NEW DIRECT MSG ADDED: " + newMsg.getContent());
+                            Log.d("Socket", " NEW DIRECT MSG ADDED: " + newMsg.getContent());
                         }
                     }
                 } catch (Exception e) {
@@ -218,7 +218,7 @@ public class ChatFragment extends Fragment {
 
         // GROUP MESSAGE
         mSocket.on("group:message:received", args -> {
-            Log.d("Socket", "🔥 GROUP MESSAGE EVENT FIRED");
+            Log.d("Socket", " GROUP MESSAGE EVENT FIRED");
             if (getActivity() == null) return;
 
             requireActivity().runOnUiThread(() -> {
@@ -234,7 +234,7 @@ public class ChatFragment extends Fragment {
                             messageList.add(newMsg);
                             adapter.notifyItemInserted(messageList.size() - 1);
                             recyclerChat.scrollToPosition(messageList.size() - 1);
-                            Log.d("Socket", "📨 NEW GROUP MSG ADDED: " + newMsg.getContent());
+                            Log.d("Socket", " NEW GROUP MSG ADDED: " + newMsg.getContent());
                         }
                     }
                 } catch (Exception e) {
@@ -245,7 +245,7 @@ public class ChatFragment extends Fragment {
 
         // DISCONNECT (optional log)
         mSocket.on(Socket.EVENT_DISCONNECT, args -> {
-            Log.d("Socket", "⚠️ DISCONNECTED: " + java.util.Arrays.toString(args));
+            Log.d("Socket", " DISCONNECTED: " + java.util.Arrays.toString(args));
         });
     }
 
@@ -369,7 +369,7 @@ public class ChatFragment extends Fragment {
             data.put("receiverId", receiverId);
             data.put("content", content);
             mSocket.emit("direct:message", data);
-            Log.d("Socket", "🚀 EMIT direct:message: " + data.toString());
+            Log.d("Socket", " EMIT direct:message: " + data.toString());
 
             // 2. Tự tạo Message local để HIỆN NGAY trên UI cho chính mình
             Message selfMsg = new Message();

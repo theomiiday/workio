@@ -64,7 +64,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1") // Đảm bảo có appcompat (phiên bản 1.6.1 trở lên)
 
-    // ⭐ Compact Calendar View (Giữ nguyên)
+    //  Compact Calendar View (Giữ nguyên)
     implementation("com.github.sundeepk:compact-calendar-view:3.0.0") {
         exclude(group = "androidx.appcompat")
         exclude(group = "com.android.support")

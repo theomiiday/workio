@@ -21,13 +21,13 @@ public class MainActivity extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-        // 🏠 Mặc định mở HomeFragment khi vào app
+        //  Mặc định mở HomeFragment khi vào app
         if (savedInstanceState == null) {
             loadFragment(new com.example.workio.ui.main.home.HomeFragment());
             bottomNavigationView.setSelectedItemId(R.id.nav_home);
         }
 
-        // ⚙️ Lắng nghe khi user chọn tab
+        //  Lắng nghe khi user chọn tab
         bottomNavigationView.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
             int itemId = item.getItemId();

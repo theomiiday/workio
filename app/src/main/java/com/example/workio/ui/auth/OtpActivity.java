@@ -17,11 +17,8 @@ import com.example.workio.R;
 import com.example.workio.data.api.ApiService;
 import com.example.workio.data.api.RetrofitClient;
 import com.example.workio.data.model.ApiResponse;
-import com.example.workio.data.model.LoginResponse;
-import com.example.workio.data.model.VerifyEmailRequest;
 import com.example.workio.data.model.ForgotPasswordRequest;
 import com.example.workio.data.model.VerifyResetOtpRequest;
-import com.example.workio.ui.onboarding.SelectBranchActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -71,8 +68,7 @@ public class OtpActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ApiResponse<Void>> call, Response<ApiResponse<Void>> response) {
                     // In mã HTTP trả về
-                    Log.d("VerifyEmail", ">>> Response code: " + response.code());
-
+//                    Log.d("VerifyEmail", ">>> Response code: " + response.code());
                     if (response.isSuccessful()) {
                         Intent intent = new Intent(OtpActivity.this, ResetPassword.class);
                         intent.putExtra("email", email);
@@ -105,7 +101,7 @@ public class OtpActivity extends AppCompatActivity {
 
         });
 
-        // ✅ Nhấn "Gửi lại OTP"
+        //  Nhấn "Gửi lại OTP"
         tvResend.setOnClickListener(v -> {
             String email = getIntent().getStringExtra("email");
             ApiService api = RetrofitClient.getInstance(this).getApiService();

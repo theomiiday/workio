@@ -16,7 +16,7 @@ public class SocketManager {
 
     private static final String TAG = "SocketManager";
     private static final String SOCKET_URL =
-            "https://emsbackend-enh5aahkg4dcfkfs.southeastasia-01.azurewebsites.net";
+            "https://emsbackend123-fhame9c6dhaue7cc.southeastasia-01.azurewebsites.net";
 
     private static SocketManager instance;
     private Socket socket;

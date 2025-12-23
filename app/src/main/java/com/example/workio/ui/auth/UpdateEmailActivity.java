@@ -55,7 +55,6 @@ public class UpdateEmailActivity extends AppCompatActivity {
                 Toast.makeText(this, "Vui lòng nhập email", Toast.LENGTH_SHORT).show();
                 return;
             }
-
             callForgotPasswordApi(email);
         });
     }
@@ -73,15 +72,13 @@ public class UpdateEmailActivity extends AppCompatActivity {
             public void onResponse(Call<ApiResponse<Void>> call, Response<ApiResponse<Void>> response) {
                 btnConfirm.setEnabled(true);
                 btnConfirm.setAlpha(1f);
-                Log.d("ForgotPassword", ">>> Response code: " + response.code());
-                Log.d("ForgotPassword", ">>> Response body: " + response.body());
-
+//                Log.d("ForgotPassword", ">>> Response code: " + response.code());
+//                Log.d("ForgotPassword", ">>> Response body: " + response.body());
                 if (response.isSuccessful()) {
                     Toast.makeText(UpdateEmailActivity.this,
                             " Mã OTP đã được gửi đến email của bạn!",
                             Toast.LENGTH_LONG).show();
 
-                    // 👉 Chuyển qua màn OTP
                     Intent intent = new Intent(UpdateEmailActivity.this, OtpActivity.class);
                     intent.putExtra("otp_purpose", "reset_password");
                     intent.putExtra("email", email);

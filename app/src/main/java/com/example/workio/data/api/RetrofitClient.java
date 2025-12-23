@@ -14,8 +14,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import java.io.IOException;
 
 public class RetrofitClient {
-    // Change this based on your environment
-    private static final String BASE_URL = "https://emsbackend-enh5aahkg4dcfkfs.southeastasia-01.azurewebsites.net/api/v1/";
+
+    private static final String BASE_URL = "https://emsbackend123-fhame9c6dhaue7cc.southeastasia-01.azurewebsites.net/api/v1/";
     // For local development (Emulator): "http://10.0.2.2:5000/api/v1/"
     // For local development (Physical Device): "http://YOUR_PC_IP:5000/api/v1/"
     // For production (Deployed): "https://emsbackend-enh5aahkg4dcfkfs.southeastasia-01.azurewebsites.net/api/v1/"

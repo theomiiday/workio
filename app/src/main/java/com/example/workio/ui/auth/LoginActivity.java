@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -30,7 +29,6 @@ import com.example.workio.data.model.LoginRequest;
 import com.example.workio.data.model.LoginResponse;
 import com.example.workio.ui.main.MainActivity;
 import com.example.workio.ui.onboarding.SelectBranchActivity;
-import com.example.workio.utils.SessionDAO;
 import com.example.workio.utils.SessionManager;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -53,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         sessionManager = new SessionManager(this);
 
-        // 🔹 Nếu người dùng đã tick “Ghi nhớ đăng nhập” → vào thẳng app
+        // Nếu người dùng đã tick “Ghi nhớ đăng nhập”, token còn hạn → vào thẳng app
         boolean remember = sessionManager.isRememberLogin();
         String token = sessionManager.getAccessToken();
 
@@ -63,9 +61,6 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         }
     }
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,26 +91,19 @@ public class LoginActivity extends AppCompatActivity {
             String username = usernameField.getText().toString().trim();
             String password = passwordField.getText().toString().trim();
 
-            if (username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Vui lòng nhập Email và mật khẩu", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
             callLoginApi(username, password);
         });
 
         setupForgotPassword();
     }
 
-    // 🔹 Gọi API đăng nhập
+    // Gọi API đăng nhập
     private void callLoginApi(String username, String password) {
         ApiService apiService = RetrofitClient.getInstance(this).getApiService();
         LoginRequest request = new LoginRequest(username, password);
 
         btnLogin.setEnabled(false);
         btnLogin.setAlpha(0.6f);
-
-
         apiService.login(request).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
@@ -169,8 +157,6 @@ public class LoginActivity extends AppCompatActivity {
         ApiService apiService = RetrofitClient.getInstance(this).getApiService();
 
         ForgotPasswordRequest request = new ForgotPasswordRequest(email);
-
-
 
         apiService.forgotPassword(request).enqueue(new Callback<ApiResponse<Void>>() {
             @Override
