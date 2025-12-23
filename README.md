@@ -8,6 +8,7 @@
 3. Tài khoản test
    email: nguyenthao24022004@gmail.com
    mật khẩu: Matkhau9@
+
 Lưu ý:
 - Backend đã được deploy sẵn. Ứng dụng sử dụng API online, không cần chạy server local
 - Ứng dụng cần kết nối Internet ổn định
